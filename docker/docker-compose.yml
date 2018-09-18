@@ -1,0 +1,18 @@
+version: '2'
+
+services:
+
+  b2b_test-python:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+    container_name: b2b_test-python
+    environment:
+      - DEBUG=$DEBUG
+      - DJANGO_SETTINGS_MODULE=$DJANGO_SETTINGS_MODULE
+      - SECRET_KEY=$SECRET_KEY
+    ports:
+      - '$VIRTUAL_HOST_EXPOSE_PORT:$VIRTUAL_HOST_PORT'
+    volumes:
+      - ./../:$SRC_DIR
+    command: python manage.py runserver 0.0.0.0:$VIRTUAL_HOST_PORT
