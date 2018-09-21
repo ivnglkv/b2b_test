@@ -5,7 +5,7 @@ from .models import SearchKeyword, YTVideo
 class SearchKeywordSerializer(serializers.ModelSerializer):
     class Meta:
         model = SearchKeyword
-        fields = ('id', 'word')
+        fields = ('id', 'key_word')
 
 
 class YTVideoSerializer(serializers.ModelSerializer):
