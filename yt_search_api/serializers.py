@@ -11,4 +11,4 @@ class SearchKeywordSerializer(serializers.ModelSerializer):
 class YTVideoSerializer(serializers.ModelSerializer):
     class Meta:
         model = YTVideo
-        fields = ('title', 'url', 'date')
+        fields = ('id', 'title', 'url', 'date')
