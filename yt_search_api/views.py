@@ -1,6 +1,7 @@
 from rest_framework import generics
 
 from .models import SearchKeyword, YTVideo
+from .pagination import MediumResultSetPagination
 from .serializers import SearchKeywordSerializer, YTVideoSerializer
 
 
@@ -16,6 +17,7 @@ class SearchKeywordDetail(generics.RetrieveDestroyAPIView):
 
 class YTVideoList(generics.ListAPIView):
     serializer_class = YTVideoSerializer
+    pagination_class = MediumResultSetPagination
 
     def get_queryset(self):
         keyword_pk = self.kwargs['key_word']
