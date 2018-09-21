@@ -20,7 +20,7 @@ class YTVideoList(generics.ListAPIView):
     pagination_class = MediumResultSetPagination
 
     def get_queryset(self):
-        keyword_pk = self.kwargs['key_word']
+        keyword_pk = self.kwargs['keyword_pk']
 
         queryset = YTVideo.objects.filter(key_words__pk=keyword_pk)
 
