@@ -15,5 +15,11 @@ class SearchKeywordDetail(generics.RetrieveDestroyAPIView):
 
 
 class YTVideoList(generics.ListAPIView):
-    queryset = YTVideo.objects.all()
     serializer_class = YTVideoSerializer
+
+    def get_queryset(self):
+        keyword_pk = self.kwargs['key_word']
+
+        queryset = YTVideo.objects.filter(key_words__pk=keyword_pk)
+
+        return queryset
