@@ -1,7 +1,11 @@
 dc=docker-compose
+manage=docker-compose exec b2b_test-python python manage.py
+
+migrations:
+	$(manage) makemigrations
 
 migrate:
-	$(dc) exec b2b_test-python python manage.py migrate
+	$(manage) migrate
 
 build:
 	$(dc) build
