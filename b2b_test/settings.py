@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework.authtoken',
     'yt_search_api.apps.YtSearchApiConfig',
+    'django_celery_beat',
 ]
 
 MIDDLEWARE = [
@@ -133,3 +134,5 @@ REST_FRAMEWORK = {
         'rest_framework.renderers.JSONRenderer',
     ),
 }
+
+CELERY_BROKER_URL = 'amqp://rabbitmq/'
