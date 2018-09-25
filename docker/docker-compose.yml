@@ -45,7 +45,7 @@ services:
   celerybeat:
     <<: *celery
     container_name: b2b_test-beat
-    command: celery -A b2b_test beat --pidfile /tmp/celerybeat.pid --schedule /tmp/celerybeat-schedule -l info
+    command: celery -A b2b_test beat --pidfile /tmp/celerybeat.pid --scheduler django_celery_beat.schedulers:DatabaseScheduler -l info
 
 networks:
   b2b_test-net:
