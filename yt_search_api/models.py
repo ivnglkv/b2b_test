@@ -21,6 +21,7 @@ class YTVideo(models.Model):
     title = models.CharField(verbose_name='заголовок', max_length=100)
     url = models.URLField(verbose_name='URL')
     date = models.DateField(verbose_name='дата загрузки')
+    published_at = models.DateTimeField(verbose_name='дата загрузки', null=True)
     key_words = models.ManyToManyField(
         SearchKeyword,
         verbose_name='ключевые слова',
