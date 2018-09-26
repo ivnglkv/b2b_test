@@ -136,3 +136,5 @@ REST_FRAMEWORK = {
 }
 
 CELERY_BROKER_URL = 'amqp://rabbitmq/'
+
+GOOGLE_API_KEY = os.environ['GOOGLE_API_KEY']
