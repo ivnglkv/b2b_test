@@ -3,6 +3,7 @@ FROM python:3-slim
 ENV APP_USER user
 ENV APP_ROOT /opt/b2b_test/
 
+# Celery рекомендуется запускать от обычного пользователя
 RUN groupadd -r ${APP_USER} \
     && useradd -r -m \
     --home-dir ${APP_ROOT} \

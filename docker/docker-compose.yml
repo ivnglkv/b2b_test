@@ -45,6 +45,9 @@ services:
   celerybeat:
     <<: *celery
     container_name: b2b_test-beat
+    # Так как запуск celery происходит от отдельного пользователя,
+    # в образе python-slim для записи недоступен каталог /var/run
+    # Поэтому pid-файл сохраняем в /tmp
     command: celery -A b2b_test beat --pidfile /tmp/celerybeat.pid --scheduler django_celery_beat.schedulers:DatabaseScheduler -l info
 
 networks:
