@@ -16,3 +16,39 @@ services:
     volumes:
       - ./../:$SRC_DIR
     command: python manage.py runserver 0.0.0.0:$VIRTUAL_HOST_PORT
+
+  rabbitmq:
+    image: rabbitmq:alpine
+    restart: always
+    container_name: b2b_test-rabbitmq
+    networks:
+      - b2b_test-net
+
+  celery: &celery
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile-celery
+    restart: always
+    container_name: b2b_test-celery
+    environment:
+      - DEBUG=$DEBUG
+      - DJANGO_SETTINGS_MODULE=$DJANGO_SETTINGS_MODULE
+      - SECRET_KEY=$SECRET_KEY
+    networks:
+      - b2b_test-net
+    depends_on:
+      - rabbitmq
+    volumes:
+      - ./../:$SRC_DIR
+    command: celery -A b2b_test worker -l info
+
+  celerybeat:
+    <<: *celery
+    container_name: b2b_test-beat
+    # Так как запуск celery происходит от отдельного пользователя,
+    # в образе python-slim для записи недоступен каталог /var/run
+    # Поэтому pid-файл сохраняем в /tmp
+    command: celery -A b2b_test beat --pidfile /tmp/celerybeat.pid --scheduler django_celery_beat.schedulers:DatabaseScheduler -l info
+
+networks:
+  b2b_test-net:
