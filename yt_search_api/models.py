@@ -9,7 +9,7 @@ class SearchKeyword(models.Model):
     key_word = models.CharField(verbose_name='слово', max_length=255, unique=True)
 
     def __str__(self):
-        return self.word
+        return self.key_word
 
 
 class YTVideo(models.Model):
