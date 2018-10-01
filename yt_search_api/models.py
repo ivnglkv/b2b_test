@@ -27,5 +27,9 @@ class YTVideo(models.Model):
         related_name='videos',
     )
 
+    class Meta:
+        verbose_name = 'Youtube video'
+        ordering = ['published_at']
+
     def __str__(self):
         return '{} ({})'.format(self.title, self.url)
